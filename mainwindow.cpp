@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include "mydialog.h"
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -25,5 +26,12 @@ void MainWindow::on_actionMy_Dialog_triggered()
 void MainWindow::on_actionClose_triggered()
 {
     this->close();
+}
+
+
+void MainWindow::on_actionSave_As_triggered()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, "Save File", "",
+        "Text Files *.txt; (*.txt) ;; All Files (*.*)" );
 }
 

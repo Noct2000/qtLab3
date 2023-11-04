@@ -20,6 +20,8 @@ private slots:
 
     void on_actionClose_triggered();
 
+    void on_actionSave_As_triggered();
+
 private:
     Ui::MainWindow *ui;
 };
