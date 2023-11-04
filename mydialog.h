@@ -14,8 +14,12 @@ class MyDialog : public QDialog
 
 public:
     QStandardItemModel *tableModel;
+    QColor color;
     explicit MyDialog(QWidget *parent = nullptr);
     ~MyDialog();
+
+private slots:
+    void on_addColor_clicked();
 
 private:
     Ui::MyDialog *ui;

@@ -1,5 +1,6 @@
 #include "mydialog.h"
 #include "ui_mydialog.h"
+#include <QColorDialog>
 
 MyDialog::MyDialog(QWidget *parent) :
     QDialog(parent),
@@ -17,3 +18,13 @@ MyDialog::~MyDialog()
 {
     delete ui;
 }
+
+void MyDialog::on_addColor_clicked()
+{
+    color = QColorDialog::getColor( Qt::black, this );
+    if(!color.isValid( ) )
+    {
+        color = Qt::black;
+    }
+}
+

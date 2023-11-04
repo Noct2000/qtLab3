@@ -55,14 +55,14 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="addColor">
       <property name="text">
        <string>Колір точок</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="addRow">
       <property name="text">
        <string>Додати рядок</string>
       </property>
