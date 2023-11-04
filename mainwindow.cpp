@@ -21,3 +21,9 @@ void MainWindow::on_actionMy_Dialog_triggered()
     dialog->exec();
 }
 
+
+void MainWindow::on_actionClose_triggered()
+{
+    this->close();
+}
+

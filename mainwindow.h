@@ -18,6 +18,8 @@ public:
 private slots:
     void on_actionMy_Dialog_triggered();
 
+    void on_actionClose_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

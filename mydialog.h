@@ -13,11 +13,11 @@ class MyDialog : public QDialog
     Q_OBJECT
 
 public:
+    QStandardItemModel *tableModel;
     explicit MyDialog(QWidget *parent = nullptr);
     ~MyDialog();
 
 private:
-    QStandardItemModel *tableModel;
     Ui::MyDialog *ui;
 };
 
