@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    rowDataList.clear(); // Clear the list
 }
 
 MainWindow::~MainWindow()
@@ -15,23 +16,24 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
 void MainWindow::on_actionMy_Dialog_triggered()
 {
     MyDialog* dialog = new MyDialog(this);
-    dialog->exec();
+    dialog->setInitialData(color, rowDataList);
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        color = dialog->color;
+        rowDataList = dialog->tableModelData();
+    }
 }
-
 
 void MainWindow::on_actionClose_triggered()
 {
     this->close();
 }
 
-
 void MainWindow::on_actionSave_As_triggered()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, "Save File", "",
-        "Text Files *.txt; (*.txt) ;; All Files (*.*)" );
+    QString fileName = QFileDialog::getSaveFileName(this, "Save File", "", "Text Files *.txt; (*.txt) ;; All Files (*.*)");
+    // Save rowDataList to the file
 }
-
