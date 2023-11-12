@@ -1,7 +1,9 @@
+#include "customsizedelegate.h"
 #include "mydialog.h"
 #include "ui_mydialog.h"
 #include <QColorDialog>
 #include <QComboBox>
+#include <QHeaderView>
 
 MyDialog::MyDialog(QWidget *parent)
     : QDialog(parent)
@@ -14,6 +16,8 @@ MyDialog::MyDialog(QWidget *parent)
     tableModel->setHorizontalHeaderItem(2, new QStandardItem("Size"));
     ui->tableView->setModel(tableModel);
     color = Qt::black;
+
+    createSizeComboBoxDelegate(); // Call the function to create the combo box delegate
 }
 
 MyDialog::~MyDialog()
@@ -57,6 +61,8 @@ void MyDialog::setInitialData(const QColor& initialColor, const QList<QList<doub
         QList<QStandardItem*> rowItems = { xItem, yItem, sizeItem };
         tableModel->appendRow(rowItems);
     }
+
+    createSizeComboBoxDelegate(); // Call the function to create the combo box delegate
 }
 
 QList<QList<double>> MyDialog::tableModelData()
@@ -73,3 +79,14 @@ QList<QList<double>> MyDialog::tableModelData()
     }
     return data;
 }
+
+void MyDialog::createSizeComboBoxDelegate()
+{
+    // Use the custom delegate for the "Size" column
+    CustomSizeDelegate *sizeDelegate = new CustomSizeDelegate(this);
+    ui->tableView->setItemDelegateForColumn(2, sizeDelegate);
+
+    // Ensure the "Size" column resizes to contents
+    ui->tableView->horizontalHeader()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
+}
+

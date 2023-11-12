@@ -1,3 +1,4 @@
+#ifndef MYDIALOG_H
 #define MYDIALOG_H
 
 #include <QDialog>
@@ -16,7 +17,6 @@ public:
     explicit MyDialog(QWidget *parent = nullptr);
     ~MyDialog();
     QList<QList<double>> tableModelData();
-    // Add a function to set the initial data in MyDialog
     void setInitialData(const QColor& color, const QList<QList<double>>& rowDataList);
     QColor color;
 
@@ -27,4 +27,9 @@ private slots:
 private:
     Ui::MyDialog *ui;
     QStandardItemModel *tableModel;
+
+    // Add a function to create a combo box delegate for the "Size" column
+    void createSizeComboBoxDelegate();
 };
+
+#endif // MYDIALOG_H
