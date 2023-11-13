@@ -3,8 +3,10 @@
 #include "mydialog.h"
 #include <QFileDialog>
 #include <QPainter>
+#include <QSvgGenerator>
 
-#define BOREDER 20
+#define BORDER 20
+#define SVG_FILE "result.svg"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -13,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     rowDataList.clear(); // Clear the list
     dotWidget = new DotWidget(this);
-    dotWidget->setGeometry(BOREDER, BOREDER, width() - BOREDER, height() - BOREDER); // Set the size to cover the whole main window
+    dotWidget->setGeometry(BORDER, BORDER, width() - BORDER * 2, height() - BORDER * 2);
     dotWidget->show();
 }
 
@@ -41,8 +43,53 @@ void MainWindow::on_actionClose_triggered()
 
 void MainWindow::on_actionSave_As_triggered()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, "Save File", "", "Text Files *.txt; (*.txt) ;; All Files (*.*)");
-    // Save rowDataList to the file
+    // Ask the user for a file name and location
+    QString fileName = QFileDialog::getSaveFileName(this, "Save As", "", "HTML File (*.html);;All Files (*)");
+
+    if (fileName.isEmpty()) {
+        return; // The user canceled the dialog
+    }
+
+    QFileInfo fileInfo(fileName);
+    QString htmlFileName = fileInfo.path() + "/" + fileInfo.baseName() + ".html";
+    QString svgFilename = fileInfo.path() + "/" + SVG_FILE;
+
+    // Save the SVG image
+    saveSvgImage(svgFilename);
+
+    // Save the HTML file
+    saveHtmlFile(htmlFileName);
+}
+
+void MainWindow::saveSvgImage(const QString &fileName)
+{
+    if (dotWidget) {
+        QSvgGenerator generator;
+        generator.setFileName(fileName);
+        generator.setSize(QSize(dotWidget->width(), dotWidget->height()));
+        generator.setViewBox(QRect(0, 0, dotWidget->width(), dotWidget->height()));
+
+        QPainter painter(&generator);
+        dotWidget->render(&painter);
+    }
+}
+
+void MainWindow::saveHtmlFile(const QString &fileName)
+{
+
+    QFile htmlFile(fileName);
+    if (htmlFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QTextStream out(&htmlFile);
+        out << "<html>\n";
+        out << "<body>\n";
+        out << "<center>\n";
+        out << "<H1>Результат малювання</H1>\n";
+        out << "<img src=\"" << SVG_FILE << "\" border=0>\n";
+        out << "</center>\n";
+        out << "</body>\n";
+        out << "</html>\n";
+        htmlFile.close();
+    }
 }
 
 void MainWindow::drawDots(QList<QList<double>> dots)

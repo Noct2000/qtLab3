@@ -26,8 +26,10 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QColor color;
-    DotWidget *dotWidget; // Add this member variable
+    DotWidget *dotWidget;
     QList<QList<double>> rowDataList;
     void drawDots(QList<QList<double>> dots);
+    void saveSvgImage(const QString &fileName);
+    void saveHtmlFile(const QString &fileName);
 };
 #endif // MAINWINDOW_H
