@@ -40,7 +40,7 @@ void MyDialog::on_addRow_clicked()
     int rowCount = tableModel->rowCount();
     tableModel->insertRow(rowCount);
 
-    // Set default size value in the "Size" column (e.g., 4)
+    // Set default size value in the "Size" column
     tableModel->setItem(rowCount, 2, new QStandardItem("4"));
 }
 

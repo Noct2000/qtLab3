@@ -29,7 +29,7 @@ void DotWidget::paintEvent(QPaintEvent *event)
         QRectF rect(x - size / 2, y - size / 2, size, size);
 
         // Set the color for the ellipse
-        painter.setBrush(QBrush(color)); // You can set the color you want
+        painter.setBrush(QBrush(color));
         painter.setPen(Qt::NoPen); // No outline
 
         // Draw the ellipse at the specified position
