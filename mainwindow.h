@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QList>
 #include <QStandardItem>
+#include "DotWidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,6 +26,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QColor color;
+    DotWidget *dotWidget; // Add this member variable
     QList<QList<double>> rowDataList;
+    void drawDots(QList<QList<double>> dots);
 };
 #endif // MAINWINDOW_H
